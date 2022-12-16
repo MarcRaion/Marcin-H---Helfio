@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SegmentedRoundDisplay from 'react-native-segmented-round-display';
+import { BmiBorders } from './BmiBorders';
+import { WhrBorders } from './WhrBorders';
 
 type ChartT = {
   chartName: string;
@@ -16,25 +18,25 @@ const Chart = ({ chartName, value }: ChartT) => {
 
   const getSummaryText = () => {
     if (chartName.toLocaleLowerCase() === 'bmi') {
-      if (value < 18.5) {
-        return 'low';
+      if (value < BmiBorders.LOW) {
+        return 'Low';
       }
-      if (value < 25) {
+      if (value < BmiBorders.NORMAL) {
         return 'Normal';
       }
-      if (value <= 30) {
+      if (value <= BmiBorders.RISEN) {
         return 'Risen';
       }
-      if (value <= 40) {
+      if (value <= BmiBorders.HIGH) {
         return 'High';
       } else {
         return 'Very high';
       }
     } else {
-      if (value <= 0.5) {
+      if (value <= WhrBorders.LOW) {
         return 'Low';
       }
-      if (value > 0.5 && value <= 1.5) {
+      if (value > WhrBorders.LOW && value <= WhrBorders.AVERAGE) {
         return 'Average';
       } else return 'High';
     }
@@ -47,37 +49,37 @@ const Chart = ({ chartName, value }: ChartT) => {
   const bmiSegments = [
     {
       total: 18.5,
-      filled: value < 18.5 ? value : 0 || (value >= 18.5 && 18.5),
+      filled: value < BmiBorders.LOW ? value : 0 || (value >= 18.5 && 18.5),
     },
     {
       total: 7,
-      filled: value >= 18.5 ? value - 18.5 : 0 || (value >= 24.99 && 7),
+      filled: value >= BmiBorders.LOW ? value - BmiBorders.LOW : 0 || (value >= 24.99 && 7),
     },
     {
       total: 5,
-      filled: value > 24.99 ? value - 25 : 0 || (value >= 30 && 5),
+      filled: value > BmiBorders.NORMAL ? value - BmiBorders.NORMAL : 0 || (value >= 30 && 5),
     },
     {
       total: 10,
-      filled: value > 30 ? value - 30 : 0 || (value >= 40 && 10),
+      filled: value > BmiBorders.RISEN ? value - BmiBorders.RISEN : 0 || (value >= 40 && 10),
     },
     {
       total: 10,
-      filled: value > 40 ? value - 40 : 0,
+      filled: value > BmiBorders.HIGH ? value - BmiBorders.HIGH : 0,
     },
   ];
   const whrSegments = [
     {
-      total: 0.5,
-      filled: value <= 0.5 ? value : 0 || (value > 0.5 && 0.5),
+      total: 1,
+      filled: value <= WhrBorders.LOW ? value - 1 : 0 || (value > 0.5 && 1),
     },
     {
       total: 1,
-      filled: value > 0.5 ? value - 0.5 : 0,
+      filled: value > WhrBorders.LOW ? value - 0.5 : 0,
     },
     {
-      total: 1.5,
-      filled: value > 1.5 ? value - 1 : 0,
+      total: 1,
+      filled: value > WhrBorders.AVERAGE ? value - 1.5 : 0,
     },
   ];
   return (

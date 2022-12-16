@@ -6,11 +6,11 @@ import Chart from './Chart';
 const MainContent = () => {
   const bmiProps = {
     chartName: 'Bmi',
-    value: 22,
+    value: 21,
   };
   const whrProps = {
     chartName: 'Vhr',
-    value: 1,
+    value: 0.99,
   };
 
   return (
