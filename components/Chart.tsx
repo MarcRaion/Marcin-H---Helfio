@@ -91,8 +91,6 @@ const Chart = ({ chartName, value }: ChartT) => {
         filledArcColor={getColor()}
         incompleteArcColor={getColor()}
         emptyArcColor="#F2EFDC"
-        valueBoxColor="blue"
-        valueBoxWidth={10}
         segments={getSegments()}
       />
       <View style={styles().container}>
