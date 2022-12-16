@@ -1,24 +1,27 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import HealthDetails from './HealthDetails';
-import BmiChart from './BmiChart';
-import ChartPannel from './ChartPannel';
-import WhrChart from './WhrChart';
+import Chart from './Chart';
 
 const MainContent = () => {
+  const bmiProps = {
+    chartName: 'Bmi',
+    value: 22,
+  };
+  const whrProps = {
+    chartName: 'Vhr',
+    value: 1,
+  };
+
   return (
     <>
-      <View style={styles.container2}>
+      <View style={styles.container}>
         <View>
           <Image source={require('../assets/body.png')} />
         </View>
         <View style={styles.charts}>
-          <View>
-            <ChartPannel Check={<BmiChart />} description="BMI" points="23.2" summary="Normal" />
-          </View>
-          <View>
-            <ChartPannel Check={<WhrChart />} description="WHR" points="0.96" summary="Average" />
-          </View>
+          <Chart chartName={bmiProps.chartName} value={bmiProps.value} />
+          <Chart chartName={whrProps.chartName} value={whrProps.value} />
         </View>
       </View>
       <HealthDetails />
@@ -27,8 +30,7 @@ const MainContent = () => {
 };
 
 const styles = StyleSheet.create({
-  container2: {
-    // position: 'absolute',
+  container: {
     width: 123.07,
     height: 342,
     left: 38,
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   charts: {
-    left: 38,
+    top: 20,
     justifyContent: 'space-around',
   },
 });
